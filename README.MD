@@ -1,6 +1,8 @@
-# Nano Build [![Dependencies](https://david-dm.org/NanoAdblocker/NanoBuild.svg)](https://david-dm.org/NanoAdblocker/NanoBuild)
+# Nano Build (Modded) [![Dependencies](https://david-dm.org/NanoAdblocker/NanoBuild.svg)](https://david-dm.org/NanoAdblocker/NanoBuild)
 
-The centralized build center
+The centralized build center modded for Nano Adblocker and Nano Defender 
+on Firefox with another product ID for signing on Mozilla. Forked from 
+[Nano Build](https://github.com/NanoAdblocker/NanoBuild)
 
 **Packaging for Firefox is disabled due to a dependency of
 [mozilla/sign-addon](https://github.com/mozilla/sign-addon) being flagged as

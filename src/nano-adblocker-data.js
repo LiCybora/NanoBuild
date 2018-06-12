@@ -137,7 +137,7 @@ exports.manifest = (browser) => {
         manifest.applications = {
             "gecko": {
                 "id": exports.firefox.id,
-                "update_url": "https://raw.githubusercontent.com/LiCybora/NanoCore/master/Extension%20Compiler/updates.json",                
+                "update_url": "https://raw.githubusercontent.com/LiCybora/NanoCoreFirefox/master/Extension%20Compiler/updates.json",                
                 "strict_min_version": "52.0"
             }
         };
