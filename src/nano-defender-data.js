@@ -22,7 +22,7 @@ exports.chromium = {
  * @const {Object}
  */
 exports.firefox = {
-    id: "{6ea144f3-db99-47f4-9a1d-815e8b3944d1}",
+    id: "{f9cacf2e-cafc-4f0f-b6ad-8e1a01b4b4d0}",
 };
 
 /**
@@ -46,6 +46,7 @@ exports.patchManifest = async (browser) => {
         manifest.applications = {
             "gecko": {
                 "id": exports.firefox.id,
+                "update_url": "https://raw.githubusercontent.com/LiCybora/NanoDefenderFirefox/master/Extension%20Compiler/updates.json",
                 "strict_min_version": "58.0"
             }
         };
@@ -53,7 +54,6 @@ exports.patchManifest = async (browser) => {
             "common.js",
             "platform/firefox-vars.js",
             "background/core.js",
-            "platform/chromium-background.js", // This is not a mistake
             "platform/firefox-background.js",
             "background/rules.js",
             "background/debug.js"

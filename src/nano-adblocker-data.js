@@ -32,7 +32,7 @@ exports.chromium = {
  * @const {Object}
  */
 exports.firefox = {
-    id: "{acf5b849-adb0-4004-b4ff-7f5332f48567}",
+    id: "{0f929014-5ed2-4527-8b8d-86a9c889b129}",
 };
 
 /**
@@ -50,6 +50,7 @@ exports.manifest = (browser) => {
             "page": "background.html"
         },
         "browser_action": {
+            "browser_style": false,
             "default_icon": {
                 "128": "img/128_on.png"
             },
@@ -136,6 +137,7 @@ exports.manifest = (browser) => {
         manifest.applications = {
             "gecko": {
                 "id": exports.firefox.id,
+                "update_url": "https://raw.githubusercontent.com/LiCybora/NanoCore/master/Extension%20Compiler/updates.json",                
                 "strict_min_version": "52.0"
             }
         };
@@ -145,13 +147,6 @@ exports.manifest = (browser) => {
         manifest.options_ui = {
             "open_in_tab": true,
             "page": "dashboard.html"
-        };
-        manifest.sidebar_action = {
-            "default_icon": {
-                "128": "img/128_on.png"
-            },
-            "default_panel": "logger-ui.html",
-            "default_title": "__MSG_statsPageName__"
         };
         delete manifest.storage;
     } else if (browser === "edge") {
