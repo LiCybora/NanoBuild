@@ -18,7 +18,9 @@ exports.version = "1.0.0.53";
  * The based on string.
  * @const {string}
  */
-exports.basedOn = "uBlock Origin Version/1.16.8 Commit/5edc527 UserCSS/disabled";
+exports.basedOn = "uBlock Origin Version/1.16.8 Commit/5edc527";
+// Firefox build has UserCSS enabled.
+//exports.basedOn = "uBlock Origin Version/1.16.8 Commit/5edc527 UserCSS/disabled";
 
 /**
  * Extra information specific to Chromium.
