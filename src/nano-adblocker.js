@@ -61,7 +61,10 @@ exports.buildCore = async (browser) => {
     );
 
     if (browser === "firefox") {
-        await smartBuild.copyDirectory(srcRepo + "/platform/webext", outputPath + "/js", false, true);
+        await smartBuild.copyDirectory(srcRepo + "/platform/firefox", outputPath + "/js", false, true);
+        await del(outputPath + "/js/vapi-usercss.pseudo.js");   // Firefox always have css dont need this
+        await del(outputPath + "/options_ui.html");             // Firefox don't need this
+        await del(outputPath + "/js/options_ui.js");            // Firefox don't need this
     } else if (browser === "edge") {
         await Promise.all([
             smartBuild.copyDirectory(srcRepo + "/platform/edge", outputPath + "/js", false, true),
