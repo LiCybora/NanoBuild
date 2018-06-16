@@ -1,1 +1,1 @@
-NODE . --firefox --adblocker --pack
+node . --firefox --adblocker --pack

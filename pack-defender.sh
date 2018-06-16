@@ -1,1 +1,1 @@
-NODE . --firefox --defender --pack
+node . --firefox --defender --pack

@@ -1,1 +1,2 @@
-NODE . --maintenance --both
+node . --maintenance --both
+

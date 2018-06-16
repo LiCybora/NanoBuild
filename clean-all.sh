@@ -1,1 +1,1 @@
-NODE . --clean
+node . --clean
