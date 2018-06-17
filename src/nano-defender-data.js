@@ -60,7 +60,7 @@ exports.patchManifest = async (browser) => {
             "background/debug.js"
         ];
         manifest.browser_action.browser_style = false;
-        manifest.content_scripts.js = [
+        manifest.content_scripts[0].js = [
             "common.js",
             "libdom.js",
             "content/core.js",
