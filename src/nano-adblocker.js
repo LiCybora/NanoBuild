@@ -66,7 +66,7 @@ exports.buildCore = async (browser) => {
         await Promise.all([
             // webext renamed, see: https://github.com/gorhill/uBlock/commit/c9b14e201a6e932158b47837e02963ca104ae602
             // The current webext is for Debian, although it designate compatible with Firefox as well
-           await smartBuild.copyDirectory(srcRepo + "/platform/firefox", outputPath + "/js", false, true),
+            await smartBuild.copyDirectory(srcRepo + "/platform/firefox", outputPath + "/js", false, true),
             // TODO: migrate (or duplicate?) nano-platoform-vars.js to platform/firefox and delete this line
             smartBuild.copyFile(srcRepo + "/platform/webext/nano-platform-vars.js", outputPath + "/js/nano-platform-vars.js"),
         ]);
