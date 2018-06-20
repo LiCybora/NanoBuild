@@ -67,7 +67,7 @@ exports.buildCore = async (browser) => {
             // webext renamed, see: https://github.com/gorhill/uBlock/commit/c9b14e201a6e932158b47837e02963ca104ae602
             // The current webext is for Debian, although it designate compatible with Firefox as well
             await smartBuild.copyDirectory(srcRepo + "/platform/firefox", outputPath + "/js", false, true),
-            // TODO: migrate (or duplicate?) nano-platoform-vars.js to platform/firefox and delete this line
+            // TODO: migrate (or duplicate?) nano-platform-vars.js to platform/firefox and delete this line
             smartBuild.copyFile(srcRepo + "/platform/webext/nano-platform-vars.js", outputPath + "/js/nano-platform-vars.js"),
         ]);
         // TODO: uBO concat vapi-usercss.js vapi-usercss.real.js into contentscript.js and eliminate them.
