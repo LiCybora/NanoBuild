@@ -334,6 +334,8 @@ exports.buildLocale = async (browser) => {
                 result[key].message = result[key].message.replace("Nano", "uBlock Origin");
             }
             if (key === "aboutBasedOn") {
+                // Modded 2018-06-21, Firefox always have UserCSS enabled, modded based on message here.
+                data.basedOn = data.basedOn.replace((browser === "firefox" ? " UserCSS/disabled" : ""), "");
                 result[key].message = result[key].message.replace("{{@data}}", data.basedOn);
             }
         }
