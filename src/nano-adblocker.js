@@ -61,10 +61,20 @@ exports.buildCore = async (browser) => {
     );
 
     if (browser === "firefox") {
-        await smartBuild.copyDirectory(srcRepo + "/platform/firefox", outputPath + "/js", false, true);
-        await del(outputPath + "/js/vapi-usercss.pseudo.js");   // Firefox always use UserCSS don't need this
-        await del(outputPath + "/options_ui.html");             // Firefox don't need this
-        await del(outputPath + "/js/options_ui.js");            // Firefox don't need this
+        // Modded 20108-06-20: Follow latest build firefox script
+        // source: https://github.com/gorhill/uBlock/blob/master/tools/make-firefox.sh
+        await Promise.all([
+            // webext renamed, see: https://github.com/gorhill/uBlock/commit/c9b14e201a6e932158b47837e02963ca104ae602
+            // The current webext is for Debian, although it designate compatible with Firefox as well
+            smartBuild.copyDirectory(srcRepo + "/platform/firefox", outputPath + "/js", false, true),
+            // TODO: migrate (or duplicate?) nano-platform-vars.js to platform/firefox and delete this line
+            smartBuild.copyFile(srcRepo + "/platform/webext/nano-platform-vars.js", outputPath + "/js/nano-platform-vars.js"),
+        ]);
+        // TODO: uBO concat vapi-usercss.js vapi-usercss.real.js into contentscript.js and eliminate them.
+        await del(outputPath + "/js/vapi-usercss.pseudo.js");
+        await del(outputPath + "/options_ui.html");
+        await del(outputPath + "/js/options_ui.js");
+
     } else if (browser === "edge") {
         await Promise.all([
             smartBuild.copyDirectory(srcRepo + "/platform/edge", outputPath + "/js", false, true),
