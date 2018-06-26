@@ -61,13 +61,7 @@ exports.buildCore = async (browser) => {
     );
 
     if (browser === "firefox") {
-        // Modded 20108-06-20: Follow latest build firefox script
-        // source: https://github.com/gorhill/uBlock/blob/master/tools/make-firefox.sh
-        await Promise.all([
-            // webext renamed, see: https://github.com/gorhill/uBlock/commit/c9b14e201a6e932158b47837e02963ca104ae602
-            // The current webext is for Debian, although it designate compatible with Firefox as well
-            smartBuild.copyDirectory(srcRepo + "/platform/firefox", outputPath + "/js", false, true),
-        ]);
+        await smartBuild.copyDirectory(srcRepo + "/platform/firefox", outputPath + "/js", false, true);
         // TODO: uBO concat vapi-usercss.js vapi-usercss.real.js into contentscript.js and eliminate them.
         await del(outputPath + "/js/vapi-usercss.pseudo.js");
         await del(outputPath + "/options_ui.html");
