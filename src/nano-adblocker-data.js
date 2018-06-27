@@ -140,37 +140,38 @@ exports.manifest = (browser) => {
                 "strict_min_version": "52.0"
             }
         };
-        manifest.incognito = "spanning";
-
-        // Modded 2018-06-20: Follow manifest of firefox platform from uBO (webext rename to firefox on Apr 28)
-        // source: https://github.com/gorhill/uBlock/blob/master/platform/firefox/manifest.json
-        let remove = (array, element) => {
-            const index = array.indexOf(element);
-            array.splice(index, 1);
-        }
         manifest.browser_action.browser_style = false;
-        // TODO: concat two usercss into contenscript.js and also remove them just as uBO?
-        remove(manifest.content_scripts[0].js, "js/vapi-usercss.pseudo.js");
-        remove(manifest.permissions, "unlimitedStorage");
-        manifest.content_scripts[0].matches.push("file://*/*");
-        delete manifest.optional_permissions;
+        manifest.content_scripts[0].js = [
+            "js/vapi.js",
+            "js/vapi-client.js",
+            "js/vapi-usercss.js",
+            "js/vapi-usercss.real.js",
+            "js/contentscript.js"
+        ];
+        manifest.content_scripts[0].matches = [
+            "http://*/*",
+            "https://*/*",
+            "file://*/*"
+        ];
+        manifest.incognito = "spanning";
         delete manifest.minimum_chrome_version;
+        delete manifest.optional_permissions;
         delete manifest.options_page;
         manifest.options_ui = {
             "open_in_tab": true,
             "page": "dashboard.html",
-            "browser_style": true   
+            "browser_style": true
         };
-        // Stable release of uBo remove sidebar_action
-        /*
-        manifest.sidebar_action = {
-            "default_icon": {
-                "128": "img/128_on.png"
-            },
-            "default_panel": "logger-ui.html",
-            "default_title": "__MSG_statsPageName__"
-        };
-        */
+        manifest.permissions = [
+            "contextMenus",
+            "privacy",
+            "storage",
+            "tabs",
+            "webNavigation",
+            "webRequest",
+            "webRequestBlocking",
+            "<all_urls>"
+        ];
         delete manifest.storage;
     } else if (browser === "edge") {
         // Edge does not care if the size is actually right but do care if the
