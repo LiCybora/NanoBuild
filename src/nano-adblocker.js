@@ -24,7 +24,7 @@ const webStore = require("../lib/web-store.js");
  * Source repositories and files.
  * @const {string}
  */
-const srcRepo = "../NanoCore";
+const srcRepo = "../NanoCoreFirefox";
 const assetsRepo = "../NanoFilters";
 const edgeShim = "../Edgyfy/edgyfy.js";
 

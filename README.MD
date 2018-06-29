@@ -1,4 +1,4 @@
-# Nano Build (Modded) [![Dependencies](https://david-dm.org/NanoAdblocker/NanoBuild.svg)](https://david-dm.org/NanoAdblocker/NanoBuild)
+# Nano Build (Modded) [![Dependencies](https://david-dm.org/LiCybora/NanoBuild.svg)](https://david-dm.org/LiCybora/NanoBuild)
 
 The centralized build center modded for Nano Adblocker and Nano Defender 
 on Firefox with another product ID for signing on Mozilla. Forked from 
@@ -25,8 +25,8 @@ need to know
 ## Usage
 
 Depending on what is being built, these repositories may be required to be in
-the same parent directory: `NanoAdblocker/NanoCore`,
-`NanoAdblocker/NanoFilters`, `jspenguin2017/uBlockProtector`,
+the same parent directory: `LiCybora/NanoCoreFirefox`,
+`NanoAdblocker/NanoFilters`, `LiCybora/NanoDefenderFirefox`,
 `jspenguin2017/Edgyfy`.
 
 The private repository `Prototype` is required for publishing.

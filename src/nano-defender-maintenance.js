@@ -15,7 +15,7 @@ const url = require("url");
  * Source repositories and files.
  * @const {string}
  */
-const srcRepo = "../uBlockProtector";
+const srcRepo = "../NanoDefenderFirefox";
 
 /**
  * Perform maintenance of Nano Defender, update dependencies.

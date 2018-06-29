@@ -24,7 +24,7 @@ const webStore = require("../lib/web-store.js");
  * Source repositories and files.
  * @const {string}
  */
-const srcRepo = "../uBlockProtector";
+const srcRepo = "../NanoDefenderFirefox";
 const edgeShim = "../Edgyfy/edgyfy.js";
 
 /**
@@ -300,7 +300,7 @@ exports.publish = async (browser) => {
 
         await packEdge.packDefender(
             fs, childProcess,
-            "../NanoCore/platform/edge/package-img",
+            "../NanoCoreFirefox/platform/edge/package-img",
             "./dist",
             "./nano_defender_" + browser + "_appx",
         );
