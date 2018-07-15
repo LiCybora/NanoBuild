@@ -54,7 +54,6 @@ exports.patchManifest = async (browser) => {
             "common.js",
             "platform/firefox-vars.js",
             "background/core.js",
-            "platform/chromium-background.js", // This is not a mistake
             "platform/firefox-background.js",
             "background/rules.js",
             "background/debug.js"
@@ -94,6 +93,16 @@ exports.patchManifest = async (browser) => {
                 "browser_action_next_to_addressbar": true
             }
         };
+        manifest.content_scripts[0].js = [
+            "common.js",
+            "libdom.js",
+            "content/core.js",
+            "platform/edge-content.js",
+            "content/rules-common.js",
+            "content/rules-specific.js",
+            "content/rules-sticky.js",
+            "content/debug.js"
+        ];
         manifest.description = "An anti-adblock defuser for Nano Adblocker";
         manifest.icons = {
             "128": "icon128.png",
