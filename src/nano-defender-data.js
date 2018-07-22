@@ -41,6 +41,8 @@ exports.patchManifest = async (browser) => {
     const path = "./dist/nano_defender_" + browser + "/manifest.json";
     let manifest = await fs.readFile(path, "utf8");
     manifest = JSON.parse(manifest);
+    // TODO: move version to Nano Build just as Nano Adblocker?
+    exports.version = manifest.version;
 
     if (browser === "firefox") {
         manifest.applications = {
