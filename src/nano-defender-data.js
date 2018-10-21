@@ -49,7 +49,7 @@ exports.patchManifest = async (browser) => {
             "gecko": {
                 "id": exports.firefox.id,
                 "update_url": "https://raw.githubusercontent.com/LiCybora/NanoDefenderFirefox/master/Extension%20Compiler/updates.json",
-                "strict_min_version": "58.0"
+                "strict_min_version": "60.0"
             }
         };
         manifest.background.scripts = [
