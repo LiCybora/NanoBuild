@@ -156,6 +156,10 @@ exports.buildExtension = async (browser) => {
     await smartBuild.createDirectory(outputPath);
 
     await smartBuild.copyDirectory(srcRepo + "/src", outputPath, true, true);
+    if (browser === "firefox") {
+        // Modded 2018-11-29: remove unused script
+        await del(outputPath + "/content/ubo-extra.js");
+    }
     await data.patchManifest(browser);
 
     if (browser === "edge") {
