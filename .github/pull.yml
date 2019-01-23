@@ -1,0 +1,7 @@
+version: "1"
+rules:
+  - base: master
+    upstream: NanoAdblocker:master
+    autoMerge: false
+    autoMergeHardReset: false
+    
