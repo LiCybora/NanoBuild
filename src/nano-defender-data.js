@@ -22,7 +22,7 @@ exports.chromium = {
  * @const {Object}
  */
 exports.firefox = {
-    id: "{f9cacf2e-cafc-4f0f-b6ad-8e1a01b4b4d0}",
+    id: "{fcf60470-b210-4c17-969e-9ae01491071e}",
 };
 
 /**
@@ -48,7 +48,6 @@ exports.patchManifest = async (browser) => {
         manifest.applications = {
             "gecko": {
                 "id": exports.firefox.id,
-                "update_url": "https://raw.githubusercontent.com/LiCybora/NanoDefenderFirefox/master/Extension%20Compiler/updates.json",
                 "strict_min_version": "60.0"
             }
         };

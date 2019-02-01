@@ -159,6 +159,9 @@ exports.buildExtension = async (browser) => {
     if (browser === "firefox") {
         // Modded 2018-11-29: remove unused script
         await del(outputPath + "/content/ubo-extra.js");
+        await del(outputPath + "/platform/chromium-vars.js");
+        await del(outputPath + "/platform/edge-vars.js");
+        await del(outputPath + "/platform/edge-content.js");
     }
     await data.patchManifest(browser);
 
