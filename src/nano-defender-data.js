@@ -64,11 +64,11 @@ exports.patchManifest = async (browser) => {
             "common.js",
             "libdom.js",
             "content/core.js",
-            "platform/firefox-content.js",
+            "platform/firefox-content.js"/*,
             "content/rules-common.js",
             "content/rules-specific.js",
             "content/rules-sticky.js",
-            "content/debug.js"
+            "content/debug.js"*/
         ];
         // TODO: Remove when Firefox properly support split mode
         manifest.incognito = "spanning";
