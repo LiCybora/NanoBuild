@@ -152,7 +152,7 @@ exports.buildExtension = async (browser) => {
 
     let outputPath = "./dist";
     await smartBuild.createDirectory(outputPath);
-    outputPath += "/nano_defender_" + browser;
+    outputPath += "/nano_defender_" + browser + "_amo_unsigned";
     await smartBuild.createDirectory(outputPath);
 
     await smartBuild.copyDirectory(srcRepo + "/src", outputPath, true, true);
@@ -261,7 +261,7 @@ exports.test = async (browser) => {
     console.log("Testing Nano Defender...");
     assert(browser === "chromium" || browser === "firefox" || browser === "edge");
 
-    const inputPath = "./dist/nano_defender_" + browser;
+    const inputPath = "./dist/nano_defender_" + browser + "_amo_unsigned";
     await checkSyntax.validateDirectory(inputPath);
 };
 /**
@@ -273,7 +273,7 @@ exports.pack = async (browser) => {
     console.log("Packaging Nano Defender...");
     assert(browser === "chromium" || browser === "firefox" || browser === "edge");
 
-    const inputPath = "./dist/nano_defender_" + browser;
+    const inputPath = "./dist/nano_defender_" + browser + "_amo_unsigned";
     const outputPath = inputPath + ".zip";
     await makeArchive.zip(inputPath, outputPath);
 };
@@ -286,7 +286,7 @@ exports.publish = async (browser) => {
     console.log("Publishing Nano Defender...");
     assert(browser === "chromium" || browser === "firefox" || browser === "edge");
 
-    const inputPath = "./dist/nano_defender_" + browser + ".zip";
+    const inputPath = "./dist/nano_defender_" + browser + "_amo_unsigned" + ".zip";
 
     if (browser === "chromium") {
         await webStore.publish(inputPath, data.chromium.id);

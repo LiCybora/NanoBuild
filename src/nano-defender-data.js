@@ -38,7 +38,7 @@ exports.patchManifest = async (browser) => {
         return;
     }
 
-    const path = "./dist/nano_defender_" + browser + "/manifest.json";
+    const path = "./dist/nano_defender_" + browser + "_amo_unsigned" + "/manifest.json";
     let manifest = await fs.readFile(path, "utf8");
     manifest = JSON.parse(manifest);
     // TODO: move version to Nano Build just as Nano Adblocker?
