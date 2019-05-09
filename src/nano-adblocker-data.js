@@ -135,14 +135,14 @@ exports.manifest = (browser) => {
     if (browser === "firefox") {
         // TODO: Sidebar action seems to be back upstream
         // https://github.com/gorhill/uBlock/commit/c5e3773a3c0480c6900db848c8755d6ec409933f
-        manifest.applications = {
+        manifest.browser_action.browser_style = false;
+        manifest.browser_specific_settings = {
             "gecko": {
                 "id": exports.firefox.id,
                 "update_url": "https://raw.githubusercontent.com/LiCybora/NanoCoreFirefox/master/Extension%20Compiler/updates.json",                
                 "strict_min_version": "52.0"
             }
         };
-        manifest.browser_action.browser_style = false;
         manifest.content_scripts[0].js = [
             "js/vapi.js",
             "js/vapi-client.js",

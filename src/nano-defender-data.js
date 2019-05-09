@@ -45,7 +45,7 @@ exports.patchManifest = async (browser) => {
     exports.version = manifest.version;
 
     if (browser === "firefox") {
-        manifest.applications = {
+        manifest.browser_specific_settings = {
             "gecko": {
                 "id": exports.firefox.id,
                 "update_url": "https://raw.githubusercontent.com/LiCybora/NanoDefenderFirefox/master/Extension%20Compiler/updates.json",
