@@ -15,10 +15,10 @@ const data = require("./nano-defender-data.js");
 const del = require("del");
 const fs = require("../lib/promise-fs.js");
 const makeArchive = require("../lib/make-archive.js");
-let packEdge; // Optional module for creating .appx package for Edge
 const os = require("os");
 const smartBuild = require("../lib/smart-build.js");
 const webStore = require("../lib/web-store.js");
+let packEdge; // Optional module for creating .appx package for Edge
 
 /**
  * Source repositories and files.
@@ -137,25 +137,31 @@ exports.buildList = async () => {
         outStream.end(resolve);
     });
 };
+
 /**
  * Build Nano Defender.
  * @async @function
- * @param {Enum} browser - One of "chromium", "firefox", "edge".
+ * @param {Enum} browser    - One of "chromium", "firefox", "edge".
+ * @param {Enum} capability - One of "standard", "pro".
  */
-exports.buildExtension = async (browser) => {
+exports.buildExtension = async (browser, capability) => {
     if (process.argv.includes("--list-only")) {
         return;
     }
 
     console.log("Building Nano Defender...");
     assert(browser === "chromium" || browser === "firefox" || browser === "edge");
+    assert(capability === "standard" || capability === "pro");
 
     let outputPath = "./dist";
     await smartBuild.createDirectory(outputPath);
+
     outputPath += "/nano_defender_" + browser + "_amo_unsigned";
+
     await smartBuild.createDirectory(outputPath);
 
     await smartBuild.copyDirectory(srcRepo + "/src", outputPath, true, true);
+
     if (browser === "firefox") {
         // Modded 2018-11-29: remove unused script
         await del(outputPath + "/content/ubo-extra.js");
@@ -163,7 +169,7 @@ exports.buildExtension = async (browser) => {
         await del(outputPath + "/platform/edge-vars.js");
         await del(outputPath + "/platform/edge-content.js");
     }
-    await data.patchManifest(browser);
+    await data.patchManifest(browser, capability);
 
     if (browser === "edge") {
         await smartBuild.copyFile(edgeShim, outputPath + "/edgyfy.js");
@@ -193,6 +199,17 @@ exports.buildExtension = async (browser) => {
                 accepting = false;
                 continue;
             }
+
+            if (trimmed === "//@pragma-if-pro") {
+                if (inPragmaBlock) {
+                    throw new Error("A @pragma-if-pro directive is enclosed in another @pragma-if-* block");
+                }
+
+                inPragmaBlock = true;
+                accepting = capability === "pro";
+                continue;
+            }
+
             if (trimmed === "//@pragma-end-if") {
                 if (!inPragmaBlock) {
                     throw new Error("A @pragma-end-if directive does not have a matching @pragma-if-* directive");
@@ -255,36 +272,46 @@ exports.buildExtension = async (browser) => {
 /**
  * Test the build package.
  * @async @function
- * @param {Enum} browser - One of "chromium", "firefox", "edge".
+ * @param {Enum} browser    - One of "chromium", "firefox", "edge".
+ * @param {Enum} capability - One of "standard", "pro".
  */
-exports.test = async (browser) => {
+exports.test = async (browser, capability) => {
     console.log("Testing Nano Defender...");
     assert(browser === "chromium" || browser === "firefox" || browser === "edge");
+    assert(capability === "standard" || capability === "pro");
 
     const inputPath = "./dist/nano_defender_" + browser + "_amo_unsigned";
+
     await checkSyntax.validateDirectory(inputPath);
 };
+
 /**
  * Create zip package.
  * @async @function
- * @param {Enum} browser - One of "chromium", "firefox", "edge".
+ * @param {Enum} browser    - One of "chromium", "firefox", "edge".
+ * @param {Enum} capability - One of "standard", "pro".
  */
-exports.pack = async (browser) => {
+exports.pack = async (browser, capability) => {
     console.log("Packaging Nano Defender...");
     assert(browser === "chromium" || browser === "firefox" || browser === "edge");
+    assert(capability === "standard" || capability === "pro");
 
     const inputPath = "./dist/nano_defender_" + browser + "_amo_unsigned";
+
     const outputPath = inputPath + ".zip";
     await makeArchive.zip(inputPath, outputPath);
 };
+
 /**
  * Publish package to extension store.
  * @async @function
- * @param {Enum} browser - One of "chromium", "firefox", "edge".
+ * @param {Enum} browser    - One of "chromium", "firefox", "edge".
+ * @param {Enum} capability - One of "standard".
  */
-exports.publish = async (browser) => {
+exports.publish = async (browser, capability) => {
     console.log("Publishing Nano Defender...");
     assert(browser === "chromium" || browser === "firefox" || browser === "edge");
+    assert(capability === "standard"); // Pro version cannot be published
 
     const inputPath = "./dist/nano_defender_" + browser + "_amo_unsigned" + ".zip";
 
@@ -301,15 +328,15 @@ exports.publish = async (browser) => {
         await del("./dist/nano_defender_edge_appx");
         await del("./dist/NanoDefender");
         await smartBuild.copyDirectory(
-            "./dist/nano_defender_" + browser,
-            "./dist/nano_defender_" + browser + "_appx",
+            "./dist/nano_defender_" + browser + "_" + capability,
+            "./dist/nano_defender_" + browser + "_" + capability + "_appx",
         );
 
         await packEdge.packDefender(
             fs, childProcess,
             "../NanoCoreFirefox/platform/edge/package-img",
             "./dist",
-            "./nano_defender_" + browser + "_appx",
+            "./nano_defender_" + browser + "_" + capability + "_appx",
         );
 
         console.warn(".appx package created, automatic upload is NOT yet implemented");

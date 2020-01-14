@@ -28,16 +28,15 @@ exports.firefox = {
 /**
  * Patch manifest.
  * @async @function
- * @param {Enum} browser - One of "chromium", "firefox", "edge".
+ * @param {Enum} browser    - One of "chromium", "firefox", "edge".
+ * @param {Enum} capability - One of "standard", "pro".
  */
-exports.patchManifest = async (browser) => {
+exports.patchManifest = async (browser, capability) => {
     assert(browser === "chromium" || browser === "firefox" || browser === "edge");
-
-    if (browser === "chromium") {
-        return;
-    }
+    assert(capability === "standard" || capability === "pro");
 
     const path = "./dist/nano_defender_" + browser + "_amo_unsigned" + "/manifest.json";
+
     let manifest = await fs.readFile(path, "utf8");
     manifest = JSON.parse(manifest);
     // TODO: move version to Nano Build just as Nano Adblocker?
@@ -118,6 +117,16 @@ exports.patchManifest = async (browser) => {
             const i = manifest.version.indexOf(".");
             manifest.version = manifest.version.substring(i + 1) + ".0";
         }
+    }
+
+    assert(manifest.browser_action.default_title === "Nano Defender Debug");
+    assert(manifest.name === "Nano Defender Debug");
+    if (capability === "pro") {
+        manifest.browser_action.default_title = "Nano Defender Pro";
+        manifest.name = "Nano Defender Pro";
+    } else {
+        manifest.browser_action.default_title = "Nano Defender";
+        manifest.name = "Nano Defender";
     }
 
     await fs.writeFile(path, JSON.stringify(manifest, null, 2), "utf8");
