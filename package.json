@@ -4,20 +4,20 @@
     "url": "https://github.com/LiCybora/NanoBuild/issues"
   },
   "dependencies": {
-    "archiver": "3.0.3",
-    "del": "5.0.0",
+    "archiver": "3.1.1",
+    "del": "5.1.0",
     "esprima": "4.0.1",
-    "node-forge": "0.8.5",
-    "sign-addon": "0.3.1"
+    "node-forge": "0.9.1",
+    "sign-addon": "2.0.4"
   },
   "description": "Centralized build engine",
   "engines": {
-    "node": "10.16.0"
+    "node": "10.18.1"
   },
   "homepage": "https://github.com/LiCybora/NanoBuild",
   "license": "GPL-3.0",
   "name": "nano-build-mod",
   "private": true,
   "repository": "https://github.com/LiCybora/NanoBuild",
-  "version": "1.0.2"
+  "version": "1.0.18"
 }
