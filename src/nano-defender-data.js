@@ -128,6 +128,10 @@ exports.patchManifest = async (browser, capability) => {
         manifest.browser_action.default_title = "Nano Defender";
         manifest.name = "Nano Defender";
     }
+    if (browser === "firefox") {
+        manifest.browser_action.default_title = "Nano Defender for Firefox";
+        manifest.name = "Nano Defender for Firefox";
+    }
 
     await fs.writeFile(path, JSON.stringify(manifest, null, 2), "utf8");
 };
