@@ -1,1 +1,1 @@
-node . --firefox --defender --pack --publish
+node . --firefox --defender --pro --pack --publish
