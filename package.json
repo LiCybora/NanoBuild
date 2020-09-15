@@ -7,7 +7,7 @@
     "archiver": "3.1.1",
     "del": "5.1.0",
     "esprima": "4.0.1",
-    "node-forge": "0.9.1",
+    "node-forge": "0.10.0",
     "sign-addon": "2.0.4"
   },
   "description": "Centralized build engine",
